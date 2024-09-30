@@ -77,6 +77,8 @@
               </ul>
             </li> -->
             <li><a href="contact.html">Contact</a></li>
+            <li><a href="support.html">Support</a></li>
+
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
@@ -115,7 +117,7 @@
               <div class="row gy-4">
 
                 <div class="col-lg-12">
-                  <article>
+                  <article data-tags="anxiety, mindfulness">
 
                     <div class="post-img">
                       <img src="assets/img/zenithia/anxiety2.PNG" alt="" class="img-fluid">
@@ -151,7 +153,7 @@
 
                 <div class="col-lg-12">
 
-                  <article>
+                  <article data-tags="resilience, personal development">
 
                     <div class="post-img">
                       <img src="assets/img/zenithia/resilience2.PNG" alt="" class="img-fluid">
@@ -187,7 +189,7 @@
 
                 <div class="col-lg-12">
 
-                  <article>
+                  <article data-tags="mindfulness, meditation">
 
                     <div class="post-img">
                       <img src="assets/img/zenithia/mindfull2.PNG" alt="" class="img-fluid">
@@ -223,7 +225,7 @@
 
                 <div class="col-lg-12">
 
-                  <article>
+                  <article data-tags="self-talk, self-compassion, self-esteem">
 
                     <div class="post-img">
                       <img src="assets/img/zenithia/selftalk2.PNG" alt="" class="img-fluid">
@@ -263,26 +265,6 @@
 
           </section><!-- /Blog Posts Section -->
 
-          <!-- Blog Pagination Section -->
-          <section id="blog-pagination" class="blog-pagination section">
-
-            <div class="container">
-              <div class="d-flex justify-content-center">
-                <ul>
-                  <li><a href="#"><i class="bi bi-chevron-left"></i></a></li>
-                  <li><a href="#">1</a></li>
-                  <li><a href="#" class="active">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#">4</a></li>
-                  <li>...</li>
-                  <li><a href="#">10</a></li>
-                  <li><a href="#"><i class="bi bi-chevron-right"></i></a></li>
-                </ul>
-              </div>
-            </div>
-
-          </section><!-- /Blog Pagination Section -->
-
         </div>
 
         <div class="col-lg-4 sidebar">
@@ -293,10 +275,11 @@
             <div class="search-widget widget-item">
 
               <h3 class="widget-title">Search</h3>
-              <form action="">
-                <input type="text">
+              <form id="search-form" action="">
+                <input type="text" id="search-input" name="search" placeholder="Search...">
                 <button type="submit"><i class="bi bi-search"></i></button>
               </form>
+              
 
             </div><!--/Search Widget -->
 
@@ -368,18 +351,18 @@
             <div class="tags-widget widget-item">
 
               <h3 class="widget-title">Tags</h3>
-              <ul>
-                <li><a href="#">Anxiety</a></li>
-                <li><a href="#">Depression</a></li>
-                <li><a href="#">Stress</a></li>
-                <li><a href="#">Mindfulness</a></li>
-                <li><a href="#">Self-Care</a></li>
-                <li><a href="#">Relationships</a></li>
-                <li><a href="#">Therapy</a></li>
-                <li><a href="#">Confidence</a></li>
-                <li><a href="#">Trauma</a></li>
-                <li><a href="#">Meditation</a></li>
-                <li><a href="#">Healing</a></li>
+              <ul id="tag-list">
+                <li><a href="#" data-tag="anxiety">Anxiety</a></li>
+                <li><a href="#" data-tag="depression">Depression</a></li>
+                <li><a href="#" data-tag="stress">Stress</a></li>
+                <li><a href="#" data-tag="mindfulness">Mindfulness</a></li>
+                <li><a href="#" data-tag="self-care">Self-Care</a></li>
+                <li><a href="#" data-tag="relationships">Relationships</a></li>
+                <li><a href="#" data-tag="therapy">Therapy</a></li>
+                <li><a href="#" data-tag="confidence">Confidence</a></li>
+                <li><a href="#" data-tag="trauma">Trauma</a></li>
+                <li><a href="#" data-tag="meditation">Meditation</a></li>
+                <li><a href="#" data-tag="healing">Healing</a></li>
               </ul>
 
             </div><!--/Tags Widget -->
@@ -413,6 +396,53 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script>
+    document.getElementById('search-form').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent form submission
+      const query = document.getElementById('search-input').value.toLowerCase();
+      const posts = document.querySelectorAll('.blog-posts article');
+
+      // Hide all posts initially
+      posts.forEach(post => post.style.display = 'none');
+
+      // Show posts that match the query
+      posts.forEach(post => {
+        const title = post.querySelector('.title a').textContent.toLowerCase();
+        if (title.includes(query)) {
+          post.style.display = 'block'; // Show matching post
+        }
+      });
+
+      // Clear the search input
+      document.getElementById('search-input').value = '';
+    });
+
+    // Function to filter posts based on a tag
+    function filterPostsByTag(tag) {
+      const posts = document.querySelectorAll('.blog-posts article');
+
+      // Hide all posts initially
+      posts.forEach(post => post.style.display = 'none');
+
+      // Show posts that have the selected tag
+      posts.forEach(post => {
+        const tags = post.getAttribute('data-tags').split(',').map(t => t.trim().toLowerCase());
+        if (tags.includes(tag.toLowerCase())) {
+          post.style.display = 'block';
+        }
+      });
+    }
+
+    // Add event listeners to each tag link
+    document.querySelectorAll('#tag-list a').forEach(tagLink => {
+      tagLink.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default anchor behavior
+        const selectedTag = this.getAttribute('data-tag');
+        filterPostsByTag(selectedTag);
+      });
+    });
+  </script>
+
 
 </body>
 

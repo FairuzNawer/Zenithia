@@ -26,6 +26,26 @@
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    .question {
+      cursor: pointer;
+      padding: 10px;
+      background-color: #f8f9fa;
+      border: 1px solid #ddd;
+      margin-top: 5px;
+      border-radius: 5px;
+    }
+
+    .answer {
+      display: none;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-top: 5px;
+      background-color: #f1f1f1;
+    }
+  </style>
 </head>
 
 <body class="contact-page">
@@ -33,7 +53,7 @@
     <div class="branding">
       <div class="container position-relative d-flex align-items-center justify-content-between">
         <a href="index.html" class="logo d-flex align-items-center">
-          <h1 class="sitename">Zenithia<br></h1>
+          <h1 class="sitename">Zenithia</h1>
         </a>
         <nav id="navmenu" class="navmenu">
           <ul>
@@ -44,7 +64,6 @@
             <li><a href="blogBoth.html">Blog</a></li>
             <li><a href="contact.html" class="active">Contact</a></li>
             <li><a href="support.html">Support</a></li>
-
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
@@ -56,35 +75,32 @@
     <div class="container mt-5">
       <div class="row justify-content-start">
         <div class="col-md-8">
-          <h2>Find Your MindMate</h2>
-          <!-- Updated form action to redirect to thanks.html -->
-          <form action="thanks.html" methods=['GET', 'POST']>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required><br><br>
+          <h2>Help & Support</h2>
+          <div class="question" onclick="toggleAnswer('answer1')">How can I ask a psychologist?</div>
+          <div class="answer" id="answer1">You can ask a psychologist by going "Ask a psychologist" service and then you can read frequently faced issues over there and submit your questions anonymously .</div>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required><br><br>
+          <div class="question" onclick="toggleAnswer('answer2')">How to find my mindmate?</div>
+          <div class="answer" id="answer2">Finding a mindmate involves seeking connections with people who share similar interests and values. In our "Personal Listener" service we hear your preference and assign your mindmate accordingly</div>
 
-            <label for="phone">Phone:</label>
-            <input type="tel" id="phone" name="phone" required><br><br>
-
-            <label for="date">Date of Appointment:</label>
-            <input type="date" id="date" name="date" required><br><br>
-
-            <label for="time">Time of Appointment:</label>
-            <input type="time" id="time" name="time" required><br><br>
-
-            <label for="message">Additional Information:</label>
-            <textarea id="message" name="message" rows="4" cols="50" placeholder="Any specific details or preferences?"></textarea><br><br>
-
-            <input type="submit" value="Submit" class="btn btn-primary">
-          </form>
+          <div class="question" onclick="toggleAnswer('answer3')">How to take an appointment?</div>
+          <div class="answer" id="answer3">To take an appointment, go to "Contact" and provide necessary information we will reach you out with an appointment</div>
+          <div class="question" onclick="toggleAnswer('answer4')">How to take the psychological tests?</div>
+          <div class="answer" id="answer4">There are two psychological tests under our "Psychological Tests" service. User can select one and takes quizes to guess their psychological condition.</div>
+          <div class="question" onclick="toggleAnswer('answer5')">What can I learn from the wellness journal?</div>
+          <div class="answer" id="answer5">You will able to learn about various topics like Anxiety, Trauma from our "Wellness Journal" Service.</div>
+          <div class="question" onclick="toggleAnswer('answer6')">Where can I find 24/7 support?</div>
+          <div class="answer" id="answer6"> <Obj>Our "Mindmate" service provides 24/7 online help</Obj>.</div>
         </div>
       </div>
     </div>
   </main>
 
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function toggleAnswer(answerId) {
+      const answer = document.getElementById(answerId);
+      answer.style.display = answer.style.display === 'none' || answer.style.display === '' ? 'block' : 'none';
+    }
+  </script>
 </body>
-
 </html>
